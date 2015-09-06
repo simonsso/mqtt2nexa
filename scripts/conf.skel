@@ -1,0 +1,16 @@
+device {
+  id = 1
+  name = %s
+  controller = 0
+  protocol = "arctech"
+  model = "codeswitch"
+  parameters {
+    # devices = ""
+    house = "%s"
+    unit = "%s"
+    # code = ""
+    # system = ""
+    # units = ""
+    # fade = ""
+  }
+}
