@@ -43,14 +43,14 @@
  */
 
 #include "targetvalues.h"
-#include "iowriter.h"
+#include "tellstick.h"
 
 int main()
 {
     class targetvalues *t;
-    class IOWriter *iow;
+    class Tellstick *iow;
     t= new targetvalues();
-    iow= new IOWriter(t);
+    iow= new Tellstick(t);
 
     iow->start();
     class MosqConnect *mqtt;

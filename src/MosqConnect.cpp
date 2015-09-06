@@ -34,7 +34,7 @@
 
 #include "MosqConnect.h"
 #include "targetvalues.h"
-#include "iowriter.h"
+#include "tellstick.h"
 
 MosqConnect::~MosqConnect()
 {
@@ -44,7 +44,7 @@ MosqConnect::MosqConnect(
         const char *host,
         int port,
         class targetvalues *tgt,
-        class IOWriter *myiow
+        class Tellstick *myiow
         ) : mosquittopp(id)
 {
     int keepalive = 60;
@@ -58,7 +58,7 @@ void MosqConnect::on_connect(int rc)
 {
     if(rc == 0){
         // Only attempt to subscribe on a successful connect.
-	subscribe("/telldus/nexa/#");
+	subscribe(NULL,"/telldus/nexa/#");
     }
 }
 

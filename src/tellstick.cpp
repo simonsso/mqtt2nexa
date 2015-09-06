@@ -1,26 +1,23 @@
-#include "iowriter.h"
+#include "tellstick.h"
 #include "targetvalues.h"
-#include "rpiPWM1.h"
 #include <QMutex>
 #include <QDebug>
 
-IOWriter::IOWriter(class targetvalues *tgt){
+Tellstick::Tellstick(class targetvalues *tgt){
     t=tgt;
     dutycycle=0;
 }
-IOWriter::~IOWriter(){
+Tellstick::~Tellstick(){
 }
 // Set dutycycle raw - TODO: caller should not need to know internal max
-void IOWriter::setDutyCycle(int dc){
+void Tellstick::setDutyCycle(int dc){
    mutex.lock();
    dutycycle=dc;
    mutex.unlock();
 }
 
-void IOWriter::run(){
+void Tellstick::run(){
     //TODO use targetvalue as increment give maxint to force on now.
-    rpiPWM1 pwm(100.0, 8192, 1e-5, rpiPWM1::MSMODE);
-    pwm.setDutyCycleCount(0);
 
     //loop forever
     while(1){
@@ -33,8 +30,6 @@ void IOWriter::run(){
             dutycycle=8192;
         }
 
-        pwm.setDutyCycleCount(dutycycle);
-        t->status=pwm.getDutyCycle();
         mutex.unlock();
         usleep(50000*sleeptimer);
     }

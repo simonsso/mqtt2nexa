@@ -15,8 +15,8 @@ SOURCES += main.cpp
 SOURCES += MosqConnect.cpp
 HEADERS += MosqConnect.h
 
-SOURCES += iowriter.cpp
-HEADERS += iowriter.h
+SOURCES += tellstick.cpp
+HEADERS += tellstick.h
 
 SOURCES += targetvalues.cpp
 HEADERS += targetvalues.h

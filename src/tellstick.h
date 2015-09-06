@@ -7,17 +7,17 @@
 #include <QMutex>
 
 
-#ifndef  __IOWRITER_H
-#define  __IOWRITER_H
+#ifndef  __TELLSTICK_H
+#define  __TELLSTICK_H
 
-class IOWriter : public QThread
+class Tellstick : public QThread
 {
     class targetvalues *t;
     class targetvalues *internal;
 
 public:
-    IOWriter(class targetvalues *tgt);
-    ~IOWriter();
+    Tellstick(class targetvalues *tgt);
+    ~Tellstick();
     void setDutyCycle(int);
 private:
     int dutycycle;
