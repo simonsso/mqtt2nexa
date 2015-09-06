@@ -91,7 +91,7 @@ void MosqConnect::on_message(const struct mosquitto_message *message)
 
                 QRegExp rxCmd("(ON|OFF)");
                 QRegExp rxAddr("/telldus/nexa/([a-lA-L])([0-9][0-9]?)");
-                if(rxCmd.indexIn(topic) != -1)&& (rxAddr.indexIn(mess) != -1)
+                if((rxCmd.indexIn(topic) != -1)&& (rxAddr.indexIn(mess) != -1))
                 {
                     //qDebug() << "Force" << rxAddr.cap(1) << rxAddr.cap(2) << rxAddr.cap(2).toInt();
                     if(0==rxCmd.cap(1).compare("ON")){

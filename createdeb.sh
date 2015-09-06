@@ -1,5 +1,7 @@
 #!/bin/bash
 
+APP="mqtt2nexa"
+
 base=$PWD
 
 #Make sure we dont have any old debs here...
@@ -10,7 +12,6 @@ rm -f *.deb
 
 pushd .|| exit 2
 
-APP="starfader"
 #Or some git info...
 VER=$(date +'%Y%m%d%H%M')
 NUM="1"

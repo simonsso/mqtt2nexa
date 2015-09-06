@@ -59,7 +59,7 @@ int main()
     mosqpp::lib_init();
 
     mqtt = new MosqConnect(
-            "star_fader",
+            "star2nexa",
             "localhost",
             1883,
             t,iow
