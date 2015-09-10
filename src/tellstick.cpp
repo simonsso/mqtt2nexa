@@ -2,6 +2,8 @@
 #include "targetvalues.h"
 #include <QMutex>
 #include <QDebug>
+#include <telldus-core.h>
+
 
 Tellstick::Tellstick(class targetvalues *tgt){
     t=tgt;
@@ -18,6 +20,15 @@ void Tellstick::setDutyCycle(int dc){
 
 void Tellstick::run(){
     //TODO use targetvalue as increment give maxint to force on now.
+    tdInit();
+    int intNumberOfDevices = tdGetNumberOfDevices();
+    for (int i = 0; i < intNumberOfDevices; i++) {
+       int id = tdGetDeviceId( i );
+       char *name = tdGetName( id );
+       printf("%d\t%s\n", id, name);
+       tdReleaseString(name);
+    }
+    tdClose();
 
     //loop forever
     while(1){

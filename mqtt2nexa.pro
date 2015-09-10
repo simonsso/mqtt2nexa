@@ -4,7 +4,7 @@ TARGET =
 
 DEPENDPATH  += . src
 INCLUDEPATH += . src
-LIBS += -lmosquittopp -lmosquitto
+LIBS += -lmosquittopp -lmosquitto -ltelldus-core
 
 target.path = /usr/local/bin/
 INSTALLS += target
