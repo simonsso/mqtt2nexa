@@ -90,19 +90,17 @@ void MosqConnect::on_message(const struct mosquitto_message *message)
     //qDebug() << "New message:" << (QDateTime::currentDateTime()).toString("hh:mm:ss") << topic << mess;
 
                 QRegExp rxCmd("(ON|OFF)");
-                QRegExp rxAddr("/telldus/nexa/([a-lA-L])([0-9][0-9]?)");
+                QRegExp rxAddr("/telldus/nexa/([a-pA-P][0-9][0-9]?)");
                 if((rxCmd.indexIn(topic) != -1)&& (rxAddr.indexIn(mess) != -1))
                 {
                     //qDebug() << "Force" << rxAddr.cap(1) << rxAddr.cap(2) << rxAddr.cap(2).toInt();
+                    int mode=0;
                     if(0==rxCmd.cap(1).compare("ON")){
-                        t->setT(rxCmd.cap(2).toInt());
+                        mode=1;
                     } else if(0==rxCmd.cap(1).compare("OFF")){
-                        t->setT(-rxCmd.cap(2).toInt());
+                        mode=-1;
                     }
-                    qDebug()<<rxAddr.cap(3)<<rxAddr.cap(4);
-                    // If divider is present Set it
-                    // Call with 0 will set divider 
-                    t->setDiv(rxAddr.cap(4).toInt());
+                    t->txCMD(rxAddr.cap(4),mode);
                 }
                 else
                 {

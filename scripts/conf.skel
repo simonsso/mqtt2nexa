@@ -1,5 +1,5 @@
 device {
-  id = 1
+  id = %d
   name = %s
   controller = 0
   protocol = "arctech"
