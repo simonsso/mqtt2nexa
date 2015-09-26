@@ -47,12 +47,9 @@
 
 int main()
 {
-    class targetvalues *t;
     class Tellstick *iow;
-    t= new targetvalues();
-    iow= new Tellstick(t);
+    iow= new Tellstick(NULL);
 
-    iow->start();
     class MosqConnect *mqtt;
     int rc;
 
@@ -62,7 +59,7 @@ int main()
             "star2nexa",
             "localhost",
             1883,
-            t,iow
+            NULL,iow
             );
     while(1)
     {

@@ -10,7 +10,7 @@
 #ifndef  __TELLSTICK_H
 #define  __TELLSTICK_H
 
-class Tellstick : public QThread
+class Tellstick
 {
     class targetvalues *t;
     class targetvalues *internal;
@@ -18,7 +18,7 @@ class Tellstick : public QThread
 public:
     Tellstick(class targetvalues *tgt);
     ~Tellstick();
-    void setDutyCycle(int);
+    void txCMD(QString,int);
 private:
     int dutycycle;
     QMutex mutex;

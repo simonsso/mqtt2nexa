@@ -50,7 +50,7 @@ make
 (cd debian/; tar c . )|(cd $NAME ; tar x)
 
 install -d $NAME/usr/sbin
-cp star_fader $NAME/usr/sbin/
+cp $APP $NAME/usr/sbin/
 
 # And the create the package
 popd

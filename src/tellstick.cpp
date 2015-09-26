@@ -11,37 +11,24 @@ Tellstick::Tellstick(class targetvalues *tgt){
 }
 Tellstick::~Tellstick(){
 }
-// Set dutycycle raw - TODO: caller should not need to know internal max
-void Tellstick::setDutyCycle(int dc){
-   mutex.lock();
-   dutycycle=dc;
-   mutex.unlock();
-}
 
-void Tellstick::run(){
-    //TODO use targetvalue as increment give maxint to force on now.
+void Tellstick::txCMD(QString addr,int mode){
+    QByteArray nexaaddr=addr.toLatin1(); 
     tdInit();
     int intNumberOfDevices = tdGetNumberOfDevices();
     for (int i = 0; i < intNumberOfDevices; i++) {
        int id = tdGetDeviceId( i );
        char *name = tdGetName( id );
-       printf("%d\t%s\n", id, name);
+       if(0==strcmp(nexaaddr,name)){
+    //      printf("Found %d\t%s\n", id, name);
+          if(mode==1){
+            tdTurnOn(id);
+          }
+          if(mode==-1){
+            tdTurnOff(id);
+          }
+       }
        tdReleaseString(name);
     }
     tdClose();
-
-    //loop forever
-    while(1){
-        mutex.lock();
-        int sleeptimer=t->getDiv();
-        dutycycle+=t->getT();
-        if(dutycycle <0 ){
-            dutycycle=0; //Zero
-        }else if (dutycycle >8192){
-            dutycycle=8192;
-        }
-
-        mutex.unlock();
-        usleep(50000*sleeptimer);
-    }
 }

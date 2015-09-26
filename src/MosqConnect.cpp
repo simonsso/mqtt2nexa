@@ -90,17 +90,18 @@ void MosqConnect::on_message(const struct mosquitto_message *message)
     //qDebug() << "New message:" << (QDateTime::currentDateTime()).toString("hh:mm:ss") << topic << mess;
 
                 QRegExp rxCmd("(ON|OFF)");
-                QRegExp rxAddr("/telldus/nexa/([a-pA-P][0-9][0-9]?)");
-                if((rxCmd.indexIn(topic) != -1)&& (rxAddr.indexIn(mess) != -1))
+                QRegExp rxAddr("/telldus/nexa/(.*)");
+                if((rxAddr.indexIn(topic) != -1)&& (rxCmd.indexIn(mess) != -1))
                 {
-                    //qDebug() << "Force" << rxAddr.cap(1) << rxAddr.cap(2) << rxAddr.cap(2).toInt();
+                    // qDebug() << "Force" << rxAddr.cap(1) << rxAddr.cap(2) << rxAddr.cap(2).toInt();
                     int mode=0;
                     if(0==rxCmd.cap(1).compare("ON")){
                         mode=1;
                     } else if(0==rxCmd.cap(1).compare("OFF")){
                         mode=-1;
                     }
-                    t->txCMD(rxAddr.cap(4),mode);
+                    // qDebug()<<rxAddr.cap(1)<<" Mode: "<<mode;
+                    iow->txCMD(rxAddr.cap(1),mode);
                 }
                 else
                 {
