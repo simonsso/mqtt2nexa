@@ -48,6 +48,16 @@ make
 #copy skeleton
 
 (cd debian/; tar c . )|(cd $NAME ; tar x)
+for i in `grep Default-Start $NAME/etc/init.d/$APP |sed s/.*://`
+do
+   install -d $NAME/etc/rc$i.d
+   (cd $NAME/etc/rc$i.d ; ln -s ../init.d/$APP S80$APP)
+done
+for i in `grep Default-Stop $NAME/etc/init.d/$APP |sed s/.*://`
+do
+   install -d $NAME/etc/rc$i.d
+   (cd $NAME/etc/rc$i.d ; ln -s ../init.d/$APP K20$APP)
+done
 
 install -d $NAME/usr/sbin
 cp $APP $NAME/usr/sbin/
@@ -55,7 +65,6 @@ cp $APP $NAME/usr/sbin/
 # And the create the package
 popd
 dpkg-deb --build $NAME || exit 40
-
 rm -rf $NAME/ || exit 50
 
 echo "Done..."
