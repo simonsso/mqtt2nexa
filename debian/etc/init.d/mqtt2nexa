@@ -1,6 +1,6 @@
 #! /bin/sh
 ### BEGIN INIT INFO
-# Provides:          star_fader
+# Provides:          mqtt2nexa
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
@@ -17,7 +17,7 @@
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Description of the service"
-NAME=star_fader
+NAME=mqtt2nexa
 DAEMON=/usr/sbin/$NAME
 #DAEMON_ARGS="--options args"
 DAEMON_ARGS=""
